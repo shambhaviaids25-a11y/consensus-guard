@@ -7,7 +7,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 def create_app() -> FastAPI:
-    # Load environment variables from backend/.env
     load_dotenv(Path(__file__).resolve().with_name(".env"))
 
     from backend.routes.audio_routes import router as audio_router
@@ -15,8 +14,8 @@ def create_app() -> FastAPI:
         log_speaker_mapping_configuration,
         router as enrollment_router,
     )
-    from routes.video_routes import router as video_router
-    from routes.meeting_routes import router as meeting_router
+    from backend.routes.video_routes import router as video_router
+    from backend.routes.meeting_routes import router as meeting_router
 
     log_speaker_mapping_configuration()
 
@@ -29,7 +28,6 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
 
-    # Register all project modules
     application.include_router(video_router)
     application.include_router(meeting_router)
     application.include_router(enrollment_router)

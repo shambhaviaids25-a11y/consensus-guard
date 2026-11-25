@@ -3,14 +3,14 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-from services.challenge import (
+from backend.services.challenge import (
     generate_meeting_challenge,
     get_meeting_challenge,
     verify_challenge_response,
     issue_or_verify_secondary_confirmation,
 )
-from services.quorum import evaluate_quorum, REQUIRED_ROLES
-from services.audit import record_audit_event, get_meeting_audit_history
+from backend.services.quorum import evaluate_quorum, REQUIRED_ROLES
+from backend.services.audit import record_audit_event, get_meeting_audit_history
 
 router = APIRouter(prefix="/api/meeting", tags=["Meeting, Quorum & Audit"])
 

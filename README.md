@@ -11,6 +11,11 @@ python -m pip install -r backend\requirements.txt
 python -m uvicorn backend.main:app --reload
 ```
 
+Python 3.14 is the conservative recommended runtime. The pinned OpenCV release
+provides a CPython stable-ABI wheel that I verified installs and runs on Python
+3.15, but its published Python classifiers currently stop at 3.14, so 3.15 is
+not yet explicitly claimed by OpenCV.
+
 The API listens at `http://127.0.0.1:8000`. Enrollment is available at `POST /api/enroll`
 as `multipart/form-data` with a `role` (`CFO`, `COO`, `VP` or `HOL`) and an `audio` file.
 Eidos validates that decoded enrollment audio is 15–60 seconds and contains at least

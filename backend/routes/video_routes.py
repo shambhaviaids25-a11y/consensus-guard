@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 from fastapi.concurrency import run_in_threadpool
-from services.video_service import validate_video_metadata, analyze_video_bytes
+from backend.services.video_service import validate_video_metadata, analyze_video_bytes
 
 router = APIRouter(prefix="/api/verify", tags=["Video Verification"])
 
