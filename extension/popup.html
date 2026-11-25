@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ConsensusGuard</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="panel">
+      <header class="header">
+        <div>
+          <p class="eyebrow">MEETING SECURITY</p>
+          <h1>ConsensusGuard</h1>
+        </div>
+        <span id="capture-indicator" class="capture-indicator" data-active="false">
+          Capture inactive
+        </span>
+      </header>
+
+      <p class="notice">
+        Tab audio is captured only after you click Start Scan. It can contain
+        multiple speakers; unclear or mixed segments are inconclusive and do not
+        identify who is speaking.
+      </p>
+
+      <section class="connection" aria-labelledby="connection-heading">
+        <div>
+          <h2 id="connection-heading">Backend connection</h2>
+          <p id="backend-status" class="status-value" aria-live="polite">Not connected</p>
+          <p id="backend-error" class="help-text" hidden></p>
+        </div>
+        <button id="retry-connection" class="secondary-button" type="button">Retry</button>
+      </section>
+
+      <label class="field-label" for="speaker-role">Executive role</label>
+      <select id="speaker-role">
+        <option value="">Select a role</option>
+        <option value="CFO">CFO</option>
+        <option value="COO">COO</option>
+        <option value="VP">VP</option>
+        <option value="HOL">HOL (Legal Head)</option>
+      </select>
+
+      <div class="actions">
+        <button id="start-scan" class="primary-button" type="button" disabled>
+          Start Scan
+        </button>
+        <button id="stop-scan" class="secondary-button" type="button" disabled>
+          Stop Scan
+        </button>
+      </div>
+      <p id="scan-status" class="scan-status" aria-live="polite">Not started</p>
+      <p id="action-error" class="error-message" aria-live="assertive" hidden></p>
+
+      <section class="results" aria-labelledby="results-heading">
+        <h2 id="results-heading">Security checks</h2>
+        <dl>
+          <div class="result-row">
+            <dt>Voice identity</dt>
+            <dd id="identity-status">Not started</dd>
+          </div>
+          <div class="result-row">
+            <dt>Audio authenticity</dt>
+            <dd id="authenticity-status">Not started</dd>
+          </div>
+          <div class="result-row">
+            <dt>Video analysis</dt>
+            <dd id="video-status">Not started</dd>
+          </div>
+          <div class="result-row">
+            <dt>Quorum</dt>
+            <dd id="quorum-status">Not started</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section
+        id="latest-result"
+        class="latest-result"
+        aria-labelledby="latest-result-heading"
+        hidden
+      >
+        <h2 id="latest-result-heading">Latest audio segment</h2>
+        <p id="latest-role" class="result-detail"></p>
+        <p id="latest-outcome" class="result-detail"></p>
+        <p id="latest-similarity" class="result-detail"></p>
+        <p id="latest-authenticity" class="result-detail"></p>
+        <p id="latest-request" class="result-detail"></p>
+        <p class="result-detail">
+          Mixed or unclear audio is not detected or separated; treat that segment’s
+          identity check as inconclusive.
+        </p>
+        <p id="latest-transport-error" class="error-message" hidden></p>
+        <details>
+          <summary>Actual backend response</summary>
+          <pre id="latest-response"></pre>
+        </details>
+      </section>
+
+      <p class="footer-note">
+        Only browser-tab audio is used. Microphone and video capture are not enabled.
+      </p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
