@@ -1,0 +1,18 @@
+[
+  {
+    "sequence_id": 1,
+    "timestamp": "2026-11-25T05:50:28.076966+00:00",
+    "meeting_id": "CG-2026-001",
+    "event_type": "CHALLENGE_VERIFIED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": null,
+    "reason": "Meeting challenge verified.",
+    "metadata": {},
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "event_hash": "7ef8f02dcffaea9c75d2482884f7e6979a3389785718baff0102d10539a15335"
+  }
+]

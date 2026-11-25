@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 
-REQUIRED_ROLES = ("CFO", "VP_SECURITY", "LEGAL")
+REQUIRED_ROLES = ("CFO", "VP", "HOL","COO")
 QUORUM_THRESHOLD = 2
 
 
