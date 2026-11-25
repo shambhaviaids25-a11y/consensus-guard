@@ -14,5 +14,2212 @@
     "metadata": {},
     "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
     "event_hash": "7ef8f02dcffaea9c75d2482884f7e6979a3389785718baff0102d10539a15335"
+  },
+  {
+    "sequence_id": 2,
+    "timestamp": "2026-11-25T17:13:38.870226+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": "pending",
+    "audio_result": "pending",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for CFO.",
+    "metadata": {},
+    "prev_hash": "7ef8f02dcffaea9c75d2482884f7e6979a3389785718baff0102d10539a15335",
+    "event_hash": "66db515046aab3a1e455d0f90c1b6157319fbfb7384e4bca32e295b63aa9ea54"
+  },
+  {
+    "sequence_id": 3,
+    "timestamp": "2026-11-25T17:13:38.949355+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: 1/2 required verified approvals completed. Awaiting unresolved checks for: VP, HOL, COO.",
+    "metadata": {
+      "verified_roles": [
+        "CFO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "VP",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "66db515046aab3a1e455d0f90c1b6157319fbfb7384e4bca32e295b63aa9ea54",
+    "event_hash": "928230e35a80230675d7a504112276d94ffb9444d29297567ad548be77ac6789"
+  },
+  {
+    "sequence_id": 4,
+    "timestamp": "2026-11-25T17:13:49.872203+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "VP",
+    "eidos_request_id": null,
+    "identity_result": "pending",
+    "audio_result": "pending",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for VP.",
+    "metadata": {},
+    "prev_hash": "928230e35a80230675d7a504112276d94ffb9444d29297567ad548be77ac6789",
+    "event_hash": "3aab9ff92d198cfecabeb5bb2202fcbb39715534c4d8599b80fb15d51204747e"
+  },
+  {
+    "sequence_id": 5,
+    "timestamp": "2026-11-25T17:13:49.944054+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (2/4 verified approvals: CFO, VP).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "3aab9ff92d198cfecabeb5bb2202fcbb39715534c4d8599b80fb15d51204747e",
+    "event_hash": "d6c9977e9280951f39d3b4f9e1beed0fbb341d6e95049d0c842be5d11731e393"
+  },
+  {
+    "sequence_id": 6,
+    "timestamp": "2026-11-25T17:13:58.590113+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "pending",
+    "audio_result": "pending",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "d6c9977e9280951f39d3b4f9e1beed0fbb341d6e95049d0c842be5d11731e393",
+    "event_hash": "312d2eb89039944457f770efda26238e9a8f2fdd5e42d41023c5888fecef40f1"
+  },
+  {
+    "sequence_id": 7,
+    "timestamp": "2026-11-25T17:13:58.685103+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "312d2eb89039944457f770efda26238e9a8f2fdd5e42d41023c5888fecef40f1",
+    "event_hash": "04614533585be9554c74f10f85e3f0e7a3c31615f272075d39acc914916cc6dd"
+  },
+  {
+    "sequence_id": 8,
+    "timestamp": "2026-11-25T17:15:33.478258+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": "pending",
+    "audio_result": "pending",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for CFO.",
+    "metadata": {},
+    "prev_hash": "04614533585be9554c74f10f85e3f0e7a3c31615f272075d39acc914916cc6dd",
+    "event_hash": "9f2cf6aac626f80c9d440678fc6485452a6b26c699f5d77e26adb33e1ecd4146"
+  },
+  {
+    "sequence_id": 9,
+    "timestamp": "2026-11-25T17:15:33.610687+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "9f2cf6aac626f80c9d440678fc6485452a6b26c699f5d77e26adb33e1ecd4146",
+    "event_hash": "dc713e3854cf5f703287d918f8cbc06c9af1808e011ef87d88a7094a03af8f28"
+  },
+  {
+    "sequence_id": 10,
+    "timestamp": "2026-11-25T17:15:41.772808+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for CFO.",
+    "metadata": {},
+    "prev_hash": "dc713e3854cf5f703287d918f8cbc06c9af1808e011ef87d88a7094a03af8f28",
+    "event_hash": "b6eb34e60e76efa8bbbd094c266108852ecf3042b67928bd480e3d5387c6543f"
+  },
+  {
+    "sequence_id": 11,
+    "timestamp": "2026-11-25T17:15:41.851706+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "b6eb34e60e76efa8bbbd094c266108852ecf3042b67928bd480e3d5387c6543f",
+    "event_hash": "2b6e47e93c78cae56b1ac80e8406ef8b3e657d0750c65ef90a3caad27641e61c"
+  },
+  {
+    "sequence_id": 12,
+    "timestamp": "2026-11-25T17:15:42.616185+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for CFO.",
+    "metadata": {},
+    "prev_hash": "2b6e47e93c78cae56b1ac80e8406ef8b3e657d0750c65ef90a3caad27641e61c",
+    "event_hash": "a48d905f31b1fb6c639a6b9abed778a8a3dd53693cd7a5789d022aeae1e29914"
+  },
+  {
+    "sequence_id": 13,
+    "timestamp": "2026-11-25T17:15:42.678541+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "a48d905f31b1fb6c639a6b9abed778a8a3dd53693cd7a5789d022aeae1e29914",
+    "event_hash": "f4b680398513919450002dfd322deee949ac06f0be26b9aa33eb4159ca835b42"
+  },
+  {
+    "sequence_id": 14,
+    "timestamp": "2026-11-25T17:15:56.755447+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "pending",
+    "audio_result": "pending",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "f4b680398513919450002dfd322deee949ac06f0be26b9aa33eb4159ca835b42",
+    "event_hash": "3596dec844fa506c1d4dd472b4ae1b61aa8db4e6d8f11d0ef47c670e437e7a5d"
+  },
+  {
+    "sequence_id": 15,
+    "timestamp": "2026-11-25T17:15:56.921343+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "3596dec844fa506c1d4dd472b4ae1b61aa8db4e6d8f11d0ef47c670e437e7a5d",
+    "event_hash": "b9802e564f023968ec07d6fac5dc89ee1453bbb851e521f94a5741766d5e1600"
+  },
+  {
+    "sequence_id": 16,
+    "timestamp": "2026-11-25T17:16:04.941271+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "b9802e564f023968ec07d6fac5dc89ee1453bbb851e521f94a5741766d5e1600",
+    "event_hash": "24b3a1beed0189dd01533c3092fdfe97d4a894d7d106ef7a68b11ad52f7746b3"
+  },
+  {
+    "sequence_id": 17,
+    "timestamp": "2026-11-25T17:16:05.058765+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "24b3a1beed0189dd01533c3092fdfe97d4a894d7d106ef7a68b11ad52f7746b3",
+    "event_hash": "8927cd35cc4e7bb395b0908f284d8a329850437e3e4cd8e48fc1efdd7e8d4e89"
+  },
+  {
+    "sequence_id": 18,
+    "timestamp": "2026-11-25T17:16:06.742696+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "8927cd35cc4e7bb395b0908f284d8a329850437e3e4cd8e48fc1efdd7e8d4e89",
+    "event_hash": "9957be880de570d7eab4a074966a1d0c26b7d359cb2ee0ffc92a5a84c3f4fe15"
+  },
+  {
+    "sequence_id": 19,
+    "timestamp": "2026-11-25T17:16:06.806868+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "9957be880de570d7eab4a074966a1d0c26b7d359cb2ee0ffc92a5a84c3f4fe15",
+    "event_hash": "704a46ee5e67b8286619caaa50fcfc871fdf2cc8cfc63e89670cd15389837fb6"
+  },
+  {
+    "sequence_id": 20,
+    "timestamp": "2026-11-25T17:16:14.980729+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "704a46ee5e67b8286619caaa50fcfc871fdf2cc8cfc63e89670cd15389837fb6",
+    "event_hash": "0bf82e4f3e49ea6ad4d2262e2e6f6a5cbe14e4d28692b07d6faf9ea534e30b40"
+  },
+  {
+    "sequence_id": 21,
+    "timestamp": "2026-11-25T17:16:15.072406+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "0bf82e4f3e49ea6ad4d2262e2e6f6a5cbe14e4d28692b07d6faf9ea534e30b40",
+    "event_hash": "f439b7895525b1bbe96e643c5fca169fa6b097d7cd9f356a7c42b9eead682599"
+  },
+  {
+    "sequence_id": 22,
+    "timestamp": "2026-11-25T17:16:15.868966+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "f439b7895525b1bbe96e643c5fca169fa6b097d7cd9f356a7c42b9eead682599",
+    "event_hash": "3b5af6bd853834e016e8685619860ce6a39cc002090e8d143502ea69485bbf5a"
+  },
+  {
+    "sequence_id": 23,
+    "timestamp": "2026-11-25T17:16:15.989917+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "3b5af6bd853834e016e8685619860ce6a39cc002090e8d143502ea69485bbf5a",
+    "event_hash": "176da62687fa7030732dbc3a2891fed809f816d421614f8669b1290c91a113e5"
+  },
+  {
+    "sequence_id": 24,
+    "timestamp": "2026-11-25T17:16:24.950583+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "176da62687fa7030732dbc3a2891fed809f816d421614f8669b1290c91a113e5",
+    "event_hash": "dc83186b737219e3dc9bc6f86dc0fa8c95bc85098bb16304f0a136dc374180e3"
+  },
+  {
+    "sequence_id": 25,
+    "timestamp": "2026-11-25T17:16:25.055227+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "dc83186b737219e3dc9bc6f86dc0fa8c95bc85098bb16304f0a136dc374180e3",
+    "event_hash": "7f55ccef25ce4a892e8b70e6cc351dae633b456f65193d61ddf9c6eccebb216b"
+  },
+  {
+    "sequence_id": 26,
+    "timestamp": "2026-11-25T17:16:26.794896+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "7f55ccef25ce4a892e8b70e6cc351dae633b456f65193d61ddf9c6eccebb216b",
+    "event_hash": "1be97c704a062c1ad15882b69cc75b73759c2fa27acef23bb751ef63f4829c29"
+  },
+  {
+    "sequence_id": 27,
+    "timestamp": "2026-11-25T17:16:26.853833+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "1be97c704a062c1ad15882b69cc75b73759c2fa27acef23bb751ef63f4829c29",
+    "event_hash": "9368f3580621bed234edf64c943fe13c7aaba02cc14514d6d986f1eaa29835bc"
+  },
+  {
+    "sequence_id": 28,
+    "timestamp": "2026-11-25T17:16:34.973706+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "9368f3580621bed234edf64c943fe13c7aaba02cc14514d6d986f1eaa29835bc",
+    "event_hash": "ef7655f8dcbf229724bc69bb4dc99922fb07b9c37fc8c5a89af67c311f522433"
+  },
+  {
+    "sequence_id": 29,
+    "timestamp": "2026-11-25T17:16:35.060920+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "ef7655f8dcbf229724bc69bb4dc99922fb07b9c37fc8c5a89af67c311f522433",
+    "event_hash": "a585a33c608d2c9c48dcad82a1fb6962986924d577c2536444319a34c648deb9"
+  },
+  {
+    "sequence_id": 30,
+    "timestamp": "2026-11-25T17:16:36.795950+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "a585a33c608d2c9c48dcad82a1fb6962986924d577c2536444319a34c648deb9",
+    "event_hash": "8f50aca9492ffc3c43058079b7bf9e6a3ad5ba09067d1641e9a726077a800bae"
+  },
+  {
+    "sequence_id": 31,
+    "timestamp": "2026-11-25T17:16:36.857835+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "8f50aca9492ffc3c43058079b7bf9e6a3ad5ba09067d1641e9a726077a800bae",
+    "event_hash": "18a5c005e614618a8565c5c748868c42b372e81b7875a9382eb7277b08d779d7"
+  },
+  {
+    "sequence_id": 32,
+    "timestamp": "2026-11-25T17:16:44.963273+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "18a5c005e614618a8565c5c748868c42b372e81b7875a9382eb7277b08d779d7",
+    "event_hash": "cce2d49b79f0452e108ecab2f0eb8167ebf83ebc02da9b3f1910f1aea54a005f"
+  },
+  {
+    "sequence_id": 33,
+    "timestamp": "2026-11-25T17:16:45.074343+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "cce2d49b79f0452e108ecab2f0eb8167ebf83ebc02da9b3f1910f1aea54a005f",
+    "event_hash": "caf144db9ce0dc67ec620d5a66aa85d0641be254d656ce3f2a76e2121e4999dc"
+  },
+  {
+    "sequence_id": 34,
+    "timestamp": "2026-11-25T17:16:46.812978+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "caf144db9ce0dc67ec620d5a66aa85d0641be254d656ce3f2a76e2121e4999dc",
+    "event_hash": "5c4a1c74c5336bb63f8c0a87376f209eb1549f31c683091fb6ff4fa44c256eb6"
+  },
+  {
+    "sequence_id": 35,
+    "timestamp": "2026-11-25T17:16:46.909816+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "5c4a1c74c5336bb63f8c0a87376f209eb1549f31c683091fb6ff4fa44c256eb6",
+    "event_hash": "27b288d69ba16cd6419325bcbd234802c15ae72ac8e7c7f236d45b853079997c"
+  },
+  {
+    "sequence_id": 36,
+    "timestamp": "2026-11-25T17:16:55.024593+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "27b288d69ba16cd6419325bcbd234802c15ae72ac8e7c7f236d45b853079997c",
+    "event_hash": "a7735970180c117bdbfb69bd755c2bcc66c5f9ca5b9452be661159a3fc86e191"
+  },
+  {
+    "sequence_id": 37,
+    "timestamp": "2026-11-25T17:16:55.121363+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "a7735970180c117bdbfb69bd755c2bcc66c5f9ca5b9452be661159a3fc86e191",
+    "event_hash": "88020ee4c98f5bec7d4871fbd35a142926956887237ea6d025912ce2790b2f6c"
+  },
+  {
+    "sequence_id": 38,
+    "timestamp": "2026-11-25T17:16:56.793727+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "88020ee4c98f5bec7d4871fbd35a142926956887237ea6d025912ce2790b2f6c",
+    "event_hash": "81ae01c1a2754f661340d1ac87380409c455c158fdf66f3e6baed9902fab136a"
+  },
+  {
+    "sequence_id": 39,
+    "timestamp": "2026-11-25T17:16:56.876338+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "81ae01c1a2754f661340d1ac87380409c455c158fdf66f3e6baed9902fab136a",
+    "event_hash": "7685dfb3d946ea4a4827bfe6b1f35d98e5438fafa1a901bf01a9d7b7c910421c"
+  },
+  {
+    "sequence_id": 40,
+    "timestamp": "2026-11-25T17:17:04.988824+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "no_suspicious_indicators",
+    "approval_status": "APPROVED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "7685dfb3d946ea4a4827bfe6b1f35d98e5438fafa1a901bf01a9d7b7c910421c",
+    "event_hash": "be8cd1af4e134f98075f767d43f66854a70945f90f430650b8f277cfbe6c67df"
+  },
+  {
+    "sequence_id": 41,
+    "timestamp": "2026-11-25T17:17:05.046179+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "APPROVED",
+    "reason": "Transaction APPROVED: Quorum satisfied (3/4 verified approvals: CFO, VP, COO).",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP",
+        "COO"
+      ],
+      "suspicious_roles": [],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "be8cd1af4e134f98075f767d43f66854a70945f90f430650b8f277cfbe6c67df",
+    "event_hash": "be4c27fa339c064cf6e799e5d419257cd2845d565c665c03c5a7a895109909a4"
+  },
+  {
+    "sequence_id": 42,
+    "timestamp": "2026-11-25T17:17:06.714890+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "be4c27fa339c064cf6e799e5d419257cd2845d565c665c03c5a7a895109909a4",
+    "event_hash": "2ff8d6969a2006d20fe4f04fd48e2e8293001d641f0a3089ec77b20e28c41775"
+  },
+  {
+    "sequence_id": 43,
+    "timestamp": "2026-11-25T17:17:06.773070+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "2ff8d6969a2006d20fe4f04fd48e2e8293001d641f0a3089ec77b20e28c41775",
+    "event_hash": "824f964bf78f712fbd44f198dc1ad4c5220061d99423660987423b9951efb3e0"
+  },
+  {
+    "sequence_id": 44,
+    "timestamp": "2026-11-25T17:17:14.983247+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "824f964bf78f712fbd44f198dc1ad4c5220061d99423660987423b9951efb3e0",
+    "event_hash": "9f62db09c52825257de5d6b909a4a623e8867bec2ec3b3254592278fa2d18cf8"
+  },
+  {
+    "sequence_id": 45,
+    "timestamp": "2026-11-25T17:17:15.058304+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "9f62db09c52825257de5d6b909a4a623e8867bec2ec3b3254592278fa2d18cf8",
+    "event_hash": "b33490d39a8672e07cda4860113f4e5184ba909f15c0c1d222506ccafa4937e9"
+  },
+  {
+    "sequence_id": 46,
+    "timestamp": "2026-11-25T17:17:16.731817+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "b33490d39a8672e07cda4860113f4e5184ba909f15c0c1d222506ccafa4937e9",
+    "event_hash": "02a1313f1a849a81110ae793c7107b4b90e0464bb74ab188c6fea335445e2056"
+  },
+  {
+    "sequence_id": 47,
+    "timestamp": "2026-11-25T17:17:16.793341+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "02a1313f1a849a81110ae793c7107b4b90e0464bb74ab188c6fea335445e2056",
+    "event_hash": "32bf07f5cb8d6ad955915a35a32bdbe00ccb794a4fa69cd7310ae5366e96dc38"
+  },
+  {
+    "sequence_id": 48,
+    "timestamp": "2026-11-25T17:17:25.018606+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "32bf07f5cb8d6ad955915a35a32bdbe00ccb794a4fa69cd7310ae5366e96dc38",
+    "event_hash": "e9afed6a7e1f8acf6bfcefdd9a8aa62e5a1bde52c8cfaa36bd806e72f5e96da7"
+  },
+  {
+    "sequence_id": 49,
+    "timestamp": "2026-11-25T17:17:25.115563+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "e9afed6a7e1f8acf6bfcefdd9a8aa62e5a1bde52c8cfaa36bd806e72f5e96da7",
+    "event_hash": "19ae1c1d73ad310687a09111d8b70c2cbb5f522c8b3cf0ad54e9c7a786081a7c"
+  },
+  {
+    "sequence_id": 50,
+    "timestamp": "2026-11-25T17:17:26.792297+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "19ae1c1d73ad310687a09111d8b70c2cbb5f522c8b3cf0ad54e9c7a786081a7c",
+    "event_hash": "3f916f5c32b0665b1d4fa3aa8005bc7cc821b03e9afbc745c599c55b4580390b"
+  },
+  {
+    "sequence_id": 51,
+    "timestamp": "2026-11-25T17:17:26.853310+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "3f916f5c32b0665b1d4fa3aa8005bc7cc821b03e9afbc745c599c55b4580390b",
+    "event_hash": "be5478e207b3ad5fce1c5b2fe18021b97461f5387e0b3dad4ece4c03cdf43278"
+  },
+  {
+    "sequence_id": 52,
+    "timestamp": "2026-11-25T17:17:34.997354+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "be5478e207b3ad5fce1c5b2fe18021b97461f5387e0b3dad4ece4c03cdf43278",
+    "event_hash": "b4afaac5c12a1c7cbec0c871c637e4162587eb90e159de2d66e4e01813e0f5d5"
+  },
+  {
+    "sequence_id": 53,
+    "timestamp": "2026-11-25T17:17:35.275332+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "b4afaac5c12a1c7cbec0c871c637e4162587eb90e159de2d66e4e01813e0f5d5",
+    "event_hash": "4ecc1226bf048f724a1a0717ad7d7093505f80295c1a0b15e0d0ff54e631e37e"
+  },
+  {
+    "sequence_id": 54,
+    "timestamp": "2026-11-25T17:17:36.859454+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "4ecc1226bf048f724a1a0717ad7d7093505f80295c1a0b15e0d0ff54e631e37e",
+    "event_hash": "5170c7f002c399e9c78e414c3afe9ca537d679f8fc560975d4cfa9df091e1fde"
+  },
+  {
+    "sequence_id": 55,
+    "timestamp": "2026-11-25T17:17:36.933960+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "5170c7f002c399e9c78e414c3afe9ca537d679f8fc560975d4cfa9df091e1fde",
+    "event_hash": "2d419252b8fa358f689c0ff2c4ec126d736fdf4a2be47b62dfb1a536cad37d6b"
+  },
+  {
+    "sequence_id": 56,
+    "timestamp": "2026-11-25T17:17:44.989547+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "2d419252b8fa358f689c0ff2c4ec126d736fdf4a2be47b62dfb1a536cad37d6b",
+    "event_hash": "75f6422ec5c9cc9a95a12f200b8a5cc4cfa64c58e0a957cfb84237f1e848c7da"
+  },
+  {
+    "sequence_id": 57,
+    "timestamp": "2026-11-25T17:17:45.063797+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "75f6422ec5c9cc9a95a12f200b8a5cc4cfa64c58e0a957cfb84237f1e848c7da",
+    "event_hash": "241f0b92cbc3d5efae42896fc236cbedb7e1f010bc71a71c3961f48917ddea83"
+  },
+  {
+    "sequence_id": 58,
+    "timestamp": "2026-11-25T17:17:46.720031+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "241f0b92cbc3d5efae42896fc236cbedb7e1f010bc71a71c3961f48917ddea83",
+    "event_hash": "b1aa15ba9a7fef0ad1ec2be70da0e0f99e234429365e9854f399b3946543f44d"
+  },
+  {
+    "sequence_id": 59,
+    "timestamp": "2026-11-25T17:17:46.817789+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "b1aa15ba9a7fef0ad1ec2be70da0e0f99e234429365e9854f399b3946543f44d",
+    "event_hash": "4081187e31deeb440ca7ca0163838643ea88442d2e52fb3347f9d07595fd329c"
+  },
+  {
+    "sequence_id": 60,
+    "timestamp": "2026-11-25T17:17:55.038482+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "4081187e31deeb440ca7ca0163838643ea88442d2e52fb3347f9d07595fd329c",
+    "event_hash": "ed5379ee40349a08d96e132304c8ef1a88e1b410bd06f0fc0eb49ad75c615497"
+  },
+  {
+    "sequence_id": 61,
+    "timestamp": "2026-11-25T17:17:55.101358+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "ed5379ee40349a08d96e132304c8ef1a88e1b410bd06f0fc0eb49ad75c615497",
+    "event_hash": "b957ff7bf514dddbaf5b54a03f260f0283584b91bfdd2448acc56ec3795e8a38"
+  },
+  {
+    "sequence_id": 62,
+    "timestamp": "2026-11-25T17:17:56.750540+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "b957ff7bf514dddbaf5b54a03f260f0283584b91bfdd2448acc56ec3795e8a38",
+    "event_hash": "2f4cbb8d844a2021f378f34785f26e69312b9943d2b9f0768cd0454f3119cee7"
+  },
+  {
+    "sequence_id": 63,
+    "timestamp": "2026-11-25T17:17:56.820226+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "2f4cbb8d844a2021f378f34785f26e69312b9943d2b9f0768cd0454f3119cee7",
+    "event_hash": "64b6df270322b48305aeed181eedd89b94e0f775d862aae13cec04580ee416db"
+  },
+  {
+    "sequence_id": 64,
+    "timestamp": "2026-11-25T17:18:05.010148+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "64b6df270322b48305aeed181eedd89b94e0f775d862aae13cec04580ee416db",
+    "event_hash": "d4972e8cbbfa9198447f1a866365d77b9a87a2c7a25c301cd2f22038c95d567c"
+  },
+  {
+    "sequence_id": 65,
+    "timestamp": "2026-11-25T17:18:05.096076+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "d4972e8cbbfa9198447f1a866365d77b9a87a2c7a25c301cd2f22038c95d567c",
+    "event_hash": "dac5eeb49dfe50dc40cbe50b18e2ec5a9e90118f45a35a10ee2ca35637ef037e"
+  },
+  {
+    "sequence_id": 66,
+    "timestamp": "2026-11-25T17:18:06.775699+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "dac5eeb49dfe50dc40cbe50b18e2ec5a9e90118f45a35a10ee2ca35637ef037e",
+    "event_hash": "8f49f685bbcaffc606ce485acacd7aad7913f388b9ca8e0c02f3230b34357afa"
+  },
+  {
+    "sequence_id": 67,
+    "timestamp": "2026-11-25T17:18:06.856376+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "8f49f685bbcaffc606ce485acacd7aad7913f388b9ca8e0c02f3230b34357afa",
+    "event_hash": "2bc8f473960a19e43bbc6a39be768e6eb77ff01d265164b6d22550ed39bf2766"
+  },
+  {
+    "sequence_id": 68,
+    "timestamp": "2026-11-25T17:18:15.022435+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "2bc8f473960a19e43bbc6a39be768e6eb77ff01d265164b6d22550ed39bf2766",
+    "event_hash": "f464402580288fada566911f197efc0868060bbaaf7054faecee82d708b479b1"
+  },
+  {
+    "sequence_id": 69,
+    "timestamp": "2026-11-25T17:18:15.101339+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "f464402580288fada566911f197efc0868060bbaaf7054faecee82d708b479b1",
+    "event_hash": "db9c20c2c1c4d1ed37a25ae296794a99004b65de53b7dc13efe32375143e8ca6"
+  },
+  {
+    "sequence_id": 70,
+    "timestamp": "2026-11-25T17:18:16.779892+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "db9c20c2c1c4d1ed37a25ae296794a99004b65de53b7dc13efe32375143e8ca6",
+    "event_hash": "bf322bfc0d1d72bb09883420096e008c8d5c0a1fb8870fdb7dba940f6bf23e4f"
+  },
+  {
+    "sequence_id": 71,
+    "timestamp": "2026-11-25T17:18:16.869035+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "bf322bfc0d1d72bb09883420096e008c8d5c0a1fb8870fdb7dba940f6bf23e4f",
+    "event_hash": "b7e5e4092303823af02400ff47f5e4941f7c87543fcbac059cbfa935df3372ca"
+  },
+  {
+    "sequence_id": 72,
+    "timestamp": "2026-11-25T17:18:25.017300+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "b7e5e4092303823af02400ff47f5e4941f7c87543fcbac059cbfa935df3372ca",
+    "event_hash": "f20f05d47a8330fb6daf1ef0c148924ff3319517a93a6b34d54400afc3f2926a"
+  },
+  {
+    "sequence_id": 73,
+    "timestamp": "2026-11-25T17:18:25.086190+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "f20f05d47a8330fb6daf1ef0c148924ff3319517a93a6b34d54400afc3f2926a",
+    "event_hash": "f82d40ad42a271d23095cf14ef96b469ce5eef559fa15ad13eefa3a0e4bce7c0"
+  },
+  {
+    "sequence_id": 74,
+    "timestamp": "2026-11-25T17:18:26.735296+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "f82d40ad42a271d23095cf14ef96b469ce5eef559fa15ad13eefa3a0e4bce7c0",
+    "event_hash": "979ad6c256c34a490b6467d87e0062e4473ce3e7405decd880a429d1d2b08aa2"
+  },
+  {
+    "sequence_id": 75,
+    "timestamp": "2026-11-25T17:18:26.797011+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "979ad6c256c34a490b6467d87e0062e4473ce3e7405decd880a429d1d2b08aa2",
+    "event_hash": "6968596cdfef11ba8143732e01d0721e868f2298dfb3eb5c53b23bbf612a22e7"
+  },
+  {
+    "sequence_id": 76,
+    "timestamp": "2026-11-25T17:18:35.031064+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "6968596cdfef11ba8143732e01d0721e868f2298dfb3eb5c53b23bbf612a22e7",
+    "event_hash": "b7287513846c10ce6d7e10d00873560dc4793ee88a4455d3339756393750fc16"
+  },
+  {
+    "sequence_id": 77,
+    "timestamp": "2026-11-25T17:18:35.103994+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "b7287513846c10ce6d7e10d00873560dc4793ee88a4455d3339756393750fc16",
+    "event_hash": "ab0a6608fea544660ede75d3d3203acfb6328aefa65b25711c111f4009b89df0"
+  },
+  {
+    "sequence_id": 78,
+    "timestamp": "2026-11-25T17:18:36.751469+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "ab0a6608fea544660ede75d3d3203acfb6328aefa65b25711c111f4009b89df0",
+    "event_hash": "eccb504892bf3d3df7db22b1379bec6a976736c0ac70fdca004ae98ea2a2b653"
+  },
+  {
+    "sequence_id": 79,
+    "timestamp": "2026-11-25T17:18:36.820656+00:00",
+    "meeting_id": "CG-TAB-1386286963",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [
+        "CFO",
+        "VP"
+      ],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "HOL"
+      ]
+    },
+    "prev_hash": "eccb504892bf3d3df7db22b1379bec6a976736c0ac70fdca004ae98ea2a2b653",
+    "event_hash": "cc1a3ad94ef05376654fd3478f241f305a1fbbf64d2cbd318fd9add033528cc7"
+  },
+  {
+    "sequence_id": 80,
+    "timestamp": "2026-11-25T17:21:40.298009+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": "pending",
+    "audio_result": "pending",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for CFO.",
+    "metadata": {},
+    "prev_hash": "cc1a3ad94ef05376654fd3478f241f305a1fbbf64d2cbd318fd9add033528cc7",
+    "event_hash": "fed5877a3b0176b1ed246deeb43c61336eef054823626cec24f913ea410d7e3e"
+  },
+  {
+    "sequence_id": 81,
+    "timestamp": "2026-11-25T17:21:40.327225+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for CFO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "CFO"
+      ],
+      "unresolved_roles": [
+        "VP",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "fed5877a3b0176b1ed246deeb43c61336eef054823626cec24f913ea410d7e3e",
+    "event_hash": "3eac52177ab95a8b5355cb91661238d80b314b594e6695ec265c2663050c3155"
+  },
+  {
+    "sequence_id": 82,
+    "timestamp": "2026-11-25T17:21:48.819314+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for CFO.",
+    "metadata": {},
+    "prev_hash": "3eac52177ab95a8b5355cb91661238d80b314b594e6695ec265c2663050c3155",
+    "event_hash": "371dc0f38a177ac661856d364bef458b7d6110ef3a9127c8e228adc4f52a9cf9"
+  },
+  {
+    "sequence_id": 83,
+    "timestamp": "2026-11-25T17:21:48.950664+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for CFO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "CFO"
+      ],
+      "unresolved_roles": [
+        "VP",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "371dc0f38a177ac661856d364bef458b7d6110ef3a9127c8e228adc4f52a9cf9",
+    "event_hash": "6f74ab1b71437ef81b63dce6e0b6ab9a4b5e658cff13cccd47cd09092d4a4f83"
+  },
+  {
+    "sequence_id": 84,
+    "timestamp": "2026-11-25T17:21:50.536316+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for CFO.",
+    "metadata": {},
+    "prev_hash": "6f74ab1b71437ef81b63dce6e0b6ab9a4b5e658cff13cccd47cd09092d4a4f83",
+    "event_hash": "ba161550056fce4472dfe78ac113e8483d4ac6b94f05a1f9250d49188c0ff49e"
+  },
+  {
+    "sequence_id": 85,
+    "timestamp": "2026-11-25T17:21:50.612046+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for CFO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "CFO"
+      ],
+      "unresolved_roles": [
+        "VP",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "ba161550056fce4472dfe78ac113e8483d4ac6b94f05a1f9250d49188c0ff49e",
+    "event_hash": "ec5ca2011bf3df783c81a1c98a3a34fd6d01d3baf5d461779637f03719d4c506"
+  },
+  {
+    "sequence_id": 86,
+    "timestamp": "2026-11-25T17:21:58.815023+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for CFO.",
+    "metadata": {},
+    "prev_hash": "ec5ca2011bf3df783c81a1c98a3a34fd6d01d3baf5d461779637f03719d4c506",
+    "event_hash": "470abd19b3da7a1d1ede62e1d00dbdbb36e3985dce887afe1905bc866d09c767"
+  },
+  {
+    "sequence_id": 87,
+    "timestamp": "2026-11-25T17:21:58.905677+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for CFO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "CFO"
+      ],
+      "unresolved_roles": [
+        "VP",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "470abd19b3da7a1d1ede62e1d00dbdbb36e3985dce887afe1905bc866d09c767",
+    "event_hash": "38a08dd1d188030994e775822acd89809e21b47988bfbe90e825c37dba608396"
+  },
+  {
+    "sequence_id": 88,
+    "timestamp": "2026-11-25T17:21:59.538957+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "CFO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for CFO.",
+    "metadata": {},
+    "prev_hash": "38a08dd1d188030994e775822acd89809e21b47988bfbe90e825c37dba608396",
+    "event_hash": "6181cfeb3cede8efbed2121c0fc3635cf6127638bcc7336618737373e776afd8"
+  },
+  {
+    "sequence_id": 89,
+    "timestamp": "2026-11-25T17:21:59.636434+00:00",
+    "meeting_id": "CG-TAB-1386286975",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for CFO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "CFO"
+      ],
+      "unresolved_roles": [
+        "VP",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "6181cfeb3cede8efbed2121c0fc3635cf6127638bcc7336618737373e776afd8",
+    "event_hash": "28cd3d0154d081dff5fb3b5bdbaa73e56daa896772c582c6e2dea968751ae6d2"
+  },
+  {
+    "sequence_id": 90,
+    "timestamp": "2026-11-25T17:25:41.616632+00:00",
+    "meeting_id": "CG-TAB-1386286980",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "pending",
+    "audio_result": "pending",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "28cd3d0154d081dff5fb3b5bdbaa73e56daa896772c582c6e2dea968751ae6d2",
+    "event_hash": "23612af0176edb6a0a2ed105e128dbf888c4ff413f05717d3fdadc234e983815"
+  },
+  {
+    "sequence_id": 91,
+    "timestamp": "2026-11-25T17:25:41.727751+00:00",
+    "meeting_id": "CG-TAB-1386286980",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "CFO",
+        "VP",
+        "HOL"
+      ]
+    },
+    "prev_hash": "23612af0176edb6a0a2ed105e128dbf888c4ff413f05717d3fdadc234e983815",
+    "event_hash": "1b162d7ec8d54bd5bd4931293f3a82883def16007cf416b1a14ac58ff60f32ad"
+  },
+  {
+    "sequence_id": 92,
+    "timestamp": "2026-11-25T17:25:49.787507+00:00",
+    "meeting_id": "CG-TAB-1386286980",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "1b162d7ec8d54bd5bd4931293f3a82883def16007cf416b1a14ac58ff60f32ad",
+    "event_hash": "4c1cb2a9756c244a8e102c138cecf0f23679c0397467912b64c4562315c0c9eb"
+  },
+  {
+    "sequence_id": 93,
+    "timestamp": "2026-11-25T17:25:49.874071+00:00",
+    "meeting_id": "CG-TAB-1386286980",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "CFO",
+        "VP",
+        "HOL"
+      ]
+    },
+    "prev_hash": "4c1cb2a9756c244a8e102c138cecf0f23679c0397467912b64c4562315c0c9eb",
+    "event_hash": "07655f8953dae756cf829336cccff27afc6ae4a2716e9710b33f0488e26245dc"
+  },
+  {
+    "sequence_id": 94,
+    "timestamp": "2026-11-25T17:25:50.466550+00:00",
+    "meeting_id": "CG-TAB-1386286980",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "COO",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for COO.",
+    "metadata": {},
+    "prev_hash": "07655f8953dae756cf829336cccff27afc6ae4a2716e9710b33f0488e26245dc",
+    "event_hash": "e0934cf60b06f3d37309bd93aafa316a61dd55e5066feec098bf77b6080f9e37"
+  },
+  {
+    "sequence_id": 95,
+    "timestamp": "2026-11-25T17:25:50.546162+00:00",
+    "meeting_id": "CG-TAB-1386286980",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for COO. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "COO"
+      ],
+      "unresolved_roles": [
+        "CFO",
+        "VP",
+        "HOL"
+      ]
+    },
+    "prev_hash": "e0934cf60b06f3d37309bd93aafa316a61dd55e5066feec098bf77b6080f9e37",
+    "event_hash": "ab77793eb27f4d72fbe29547f422305f7566853c3d56cc6da5571b565bbc0607"
+  },
+  {
+    "sequence_id": 96,
+    "timestamp": "2026-11-25T17:27:32.579591+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "VP",
+    "eidos_request_id": null,
+    "identity_result": "pending",
+    "audio_result": "pending",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for VP.",
+    "metadata": {},
+    "prev_hash": "ab77793eb27f4d72fbe29547f422305f7566853c3d56cc6da5571b565bbc0607",
+    "event_hash": "6ca6283f449bc1edab52c891c55fe2e7873e00a48c37cac923e1a0e8cdb8fba4"
+  },
+  {
+    "sequence_id": 97,
+    "timestamp": "2026-11-25T17:27:32.613187+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for VP. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "VP"
+      ],
+      "unresolved_roles": [
+        "CFO",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "6ca6283f449bc1edab52c891c55fe2e7873e00a48c37cac923e1a0e8cdb8fba4",
+    "event_hash": "fe1b0407927a31210e502e6e9e131d8e67fa6d0b29650cef4648a5af30bd2d9b"
+  },
+  {
+    "sequence_id": 98,
+    "timestamp": "2026-11-25T17:27:41.050286+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "VP",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for VP.",
+    "metadata": {},
+    "prev_hash": "fe1b0407927a31210e502e6e9e131d8e67fa6d0b29650cef4648a5af30bd2d9b",
+    "event_hash": "b3c895cb993dae676ee83439a6f1541bcbf3bfdafe4745397c77f3668723dad0"
+  },
+  {
+    "sequence_id": 99,
+    "timestamp": "2026-11-25T17:27:41.132108+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for VP. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "VP"
+      ],
+      "unresolved_roles": [
+        "CFO",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "b3c895cb993dae676ee83439a6f1541bcbf3bfdafe4745397c77f3668723dad0",
+    "event_hash": "1db6194143b98ed30d56ac4c4f133aeb95cf98a45d768a8bb78902e3efc0df85"
+  },
+  {
+    "sequence_id": 100,
+    "timestamp": "2026-11-25T17:27:41.751267+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "VP",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for VP.",
+    "metadata": {},
+    "prev_hash": "1db6194143b98ed30d56ac4c4f133aeb95cf98a45d768a8bb78902e3efc0df85",
+    "event_hash": "bd16d685b37a3bbe3b43af81c5dd4587f8012d169deab003383a8fd991333f1e"
+  },
+  {
+    "sequence_id": 101,
+    "timestamp": "2026-11-25T17:27:41.844403+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for VP. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "VP"
+      ],
+      "unresolved_roles": [
+        "CFO",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "bd16d685b37a3bbe3b43af81c5dd4587f8012d169deab003383a8fd991333f1e",
+    "event_hash": "75b11e5fcccee19dcc76666fa282d2d3019dd0befd42c0b4facd8c1e953ca6a2"
+  },
+  {
+    "sequence_id": 102,
+    "timestamp": "2026-11-25T17:27:50.993023+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "VP",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for VP.",
+    "metadata": {},
+    "prev_hash": "75b11e5fcccee19dcc76666fa282d2d3019dd0befd42c0b4facd8c1e953ca6a2",
+    "event_hash": "16edb17be8ca278bd7b43129a903272a4a51b7ebc3097b69ec3a1802747163b6"
+  },
+  {
+    "sequence_id": 103,
+    "timestamp": "2026-11-25T17:27:51.149976+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for VP. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "VP"
+      ],
+      "unresolved_roles": [
+        "CFO",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "16edb17be8ca278bd7b43129a903272a4a51b7ebc3097b69ec3a1802747163b6",
+    "event_hash": "674fb0f93d9130c264dc44c20763c76a84309952be07358531c8c17f213df9bd"
+  },
+  {
+    "sequence_id": 104,
+    "timestamp": "2026-11-25T17:27:52.839907+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "PARTICIPANT_SIGNAL_RECORDED",
+    "role": "VP",
+    "eidos_request_id": null,
+    "identity_result": "error",
+    "audio_result": "not_checked",
+    "video_result": "suspicious_indicators",
+    "approval_status": "REJECTED",
+    "reason": "Updated verification state for VP.",
+    "metadata": {},
+    "prev_hash": "674fb0f93d9130c264dc44c20763c76a84309952be07358531c8c17f213df9bd",
+    "event_hash": "15b9699467223785ca5eb0b0f22614578cf4d21aecc931e835cc89b7be12e651"
+  },
+  {
+    "sequence_id": 105,
+    "timestamp": "2026-11-25T17:27:52.920059+00:00",
+    "meeting_id": "CG-TAB-1386286989",
+    "event_type": "QUORUM_DECISION",
+    "role": null,
+    "eidos_request_id": null,
+    "identity_result": null,
+    "audio_result": null,
+    "video_result": null,
+    "approval_status": "ON_HOLD",
+    "reason": "Transaction ON HOLD: Security anomaly detected for VP. Requires secondary verification or investigation before authorization.",
+    "metadata": {
+      "verified_roles": [],
+      "suspicious_roles": [
+        "VP"
+      ],
+      "unresolved_roles": [
+        "CFO",
+        "HOL",
+        "COO"
+      ]
+    },
+    "prev_hash": "15b9699467223785ca5eb0b0f22614578cf4d21aecc931e835cc89b7be12e651",
+    "event_hash": "4e3ffa720465cf9689469f8b555fdaf80b5c8fa1ba1b3704990c2b5a2152a2e7"
   }
 ]

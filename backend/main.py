@@ -4,7 +4,14 @@ from pathlib import Path
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import os
+import sys
 
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(BACKEND_DIR)
+for path in (BACKEND_DIR, ROOT_DIR):
+    if path not in sys.path:
+        sys.path.insert(0, path)
 
 def create_app() -> FastAPI:
     # Load environment variables from backend/.env

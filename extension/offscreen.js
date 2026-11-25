@@ -1,5 +1,7 @@
 const VERIFICATION_URL = "http://localhost:8000/api/verify/audio";
+const VIDEO_VERIFICATION_URL = "http://localhost:8000/api/verify/video";
 const SEGMENT_DURATION_MS = 10_000;
+const VIDEO_CLIP_DURATION_MS = 3_000;
 const MIN_SEGMENT_DURATION_MS = 8_000;
 const UPLOAD_TIMEOUT_MS = 45_000;
 const MAX_PENDING_SEGMENTS = 3;
@@ -9,13 +11,16 @@ let capturedStream = null;
 let audioContext = null;
 let audioSource = null;
 let currentRecorder = null;
+let currentVideoRecorder = null;
 let segmentTimer = null;
+let videoTimer = null;
 let currentUploadController = null;
 let uploadQueue = [];
 let uploadInProgress = false;
 let selectedRole = null;
 let segmentIndex = 0;
 let recordingMimeType = null;
+let videoMimeType = null;
 
 async function sendBackgroundEvent(type, details = {}) {
   try {
@@ -42,10 +47,21 @@ function getRecordingMimeType() {
   return mimeType;
 }
 
+function getVideoMimeType() {
+  const supportedTypes = [
+    "video/webm;codecs=vp8",
+    "video/webm;codecs=vp9",
+    "video/webm"
+  ];
+  return supportedTypes.find(type => MediaRecorder.isTypeSupported(type)) || null;
+}
+
 async function cleanupCapture() {
   captureActive = false;
   clearTimeout(segmentTimer);
   segmentTimer = null;
+  clearTimeout(videoTimer);
+  videoTimer = null;
 
   const recorder = currentRecorder;
   currentRecorder = null;
@@ -54,6 +70,16 @@ async function cleanupCapture() {
       recorder.stop();
     } catch {
       // The recorder may already have stopped after a browser error.
+    }
+  }
+
+  const vRecorder = currentVideoRecorder;
+  currentVideoRecorder = null;
+  if (vRecorder && vRecorder.state !== "inactive") {
+    try {
+      vRecorder.stop();
+    } catch {
+      // Ignore already-stopped video recorder.
     }
   }
 
@@ -85,11 +111,12 @@ async function cleanupCapture() {
   }
 
   if (audioContext && audioContext.state !== "closed") {
-    await audioContext.close().catch(() => {});
+    await audioContext.close().catch(() => { });
   }
   audioContext = null;
   selectedRole = null;
   recordingMimeType = null;
+  videoMimeType = null;
 }
 
 async function failCapture(error) {
@@ -123,6 +150,92 @@ function enqueueSegment(blob, index) {
   void drainUploadQueue();
 }
 
+async function uploadVideoClip(blob, index) {
+  if (!blob || !blob.size || !selectedRole) {
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("role", selectedRole);
+  formData.append(
+    "file",
+    blob,
+    `consensusguard-frame-${index}.jpg`
+  );
+
+  try {
+    const response = await fetch(VIDEO_VERIFICATION_URL, {
+      method: "POST",
+      body: formData
+    });
+    if (!response.ok) {
+      await sendBackgroundEvent("VIDEO_VERIFICATION_RESPONSE", {
+        segmentIndex: index,
+        httpStatus: response.status,
+        response: { verdict: "inconclusive" }
+      });
+      return;
+    }
+    const payload = await response.json();
+    await sendBackgroundEvent("VIDEO_VERIFICATION_RESPONSE", {
+      segmentIndex: index,
+      httpStatus: response.status,
+      response: payload
+    });
+  } catch (error) {
+    console.warn(`ConsensusGuard video check skipped: ${error.message}`);
+    await sendBackgroundEvent("VIDEO_VERIFICATION_RESPONSE", {
+      segmentIndex: index,
+      httpStatus: 0,
+      response: { verdict: "inconclusive" }
+    });
+  }
+}
+
+async function captureVideoSample(index) {
+  if (!captureActive || !capturedStream) {
+    return;
+  }
+  const videoTracks = capturedStream.getVideoTracks();
+  if (!videoTracks.length) {
+    await sendBackgroundEvent("VIDEO_VERIFICATION_RESPONSE", {
+      segmentIndex: index,
+      httpStatus: 0,
+      response: { verdict: "inconclusive" }
+    });
+    return;
+  }
+
+  try {
+    const videoEl = document.createElement("video");
+    videoEl.muted = true;
+    videoEl.playsInline = true;
+    videoEl.srcObject = new MediaStream(videoTracks);
+    await videoEl.play();
+
+    // Wait 500ms so the first decoded video frame is ready
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    const width = videoEl.videoWidth || 1280;
+    const height = videoEl.videoHeight || 720;
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(videoEl, 0, 0, width, height);
+
+    videoEl.pause();
+    videoEl.srcObject = null;
+
+    canvas.toBlob(blob => {
+      if (captureActive && blob && blob.size > 0) {
+        void uploadVideoClip(blob, index);
+      }
+    }, "image/jpeg", 0.92);
+  } catch (error) {
+    console.warn(`ConsensusGuard frame capture warning: ${error.message}`);
+  }
+}
 async function uploadSegment(segment) {
   const controller = new AbortController();
   currentUploadController = controller;
@@ -219,7 +332,8 @@ function startRecordingSegment() {
   let recorder;
 
   try {
-    recorder = new MediaRecorder(capturedStream, {
+    const audioOnlyStream = new MediaStream(capturedStream.getAudioTracks());
+    recorder = new MediaRecorder(audioOnlyStream, {
       mimeType: recordingMimeType
     });
     currentRecorder = recorder;
@@ -257,8 +371,9 @@ function startRecordingSegment() {
     }, { once: true });
 
     recorder.start();
+    captureVideoSample(thisSegment);
     void sendBackgroundEvent("CAPTURE_PROGRESS", {
-      status: `Recording 10-second segment ${thisSegment} for ${selectedRole}.`
+      status: `Recording 10-second audio + video segment ${thisSegment} for ${selectedRole}.`
     });
     segmentTimer = setTimeout(() => {
       if (captureActive && recorder.state === "recording") {
@@ -277,17 +392,36 @@ async function startCapture(streamId, role) {
 
   try {
     recordingMimeType = getRecordingMimeType();
+    videoMimeType = getVideoMimeType();
     selectedRole = role;
 
-    capturedStream = await navigator.mediaDevices.getUserMedia({
-      audio: {
-        mandatory: {
-          chromeMediaSource: "tab",
-          chromeMediaSourceId: streamId
+    try {
+      capturedStream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          mandatory: {
+            chromeMediaSource: "tab",
+            chromeMediaSourceId: streamId
+          }
+        },
+        video: {
+          mandatory: {
+            chromeMediaSource: "tab",
+            chromeMediaSourceId: streamId
+          }
         }
-      },
-      video: false
-    });
+      });
+    } catch {
+      capturedStream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          mandatory: {
+            chromeMediaSource: "tab",
+            chromeMediaSourceId: streamId
+          }
+        },
+        video: false
+      });
+    }
+
     if (!capturedStream.getAudioTracks().length) {
       throw new Error("The selected tab did not provide an audio track.");
     }

@@ -1,4 +1,5 @@
 const BACKEND_OPENAPI_URL = "http://localhost:8000/openapi.json";
+const MEETING_API_BASE = "http://localhost:8000/api/meeting";
 const OFFSCREEN_URL = "offscreen.html";
 const SUPPORTED_ROLES = new Set(["CFO", "COO", "VP", "HOL"]);
 const DEFAULT_STATE = {
@@ -13,7 +14,8 @@ const DEFAULT_STATE = {
   authenticityStatus: "Not started",
   videoAnalysisStatus: "Not started",
   quorumStatus: "Not started",
-  latestVerification: null
+  latestVerification: null,
+  latestVideoVerification: null
 };
 
 async function getState() {
@@ -30,7 +32,7 @@ async function saveState(state) {
     target: "popup",
     type: "STATE_UPDATED",
     state
-  }).catch(() => {});
+  }).catch(() => { });
   return state;
 }
 
@@ -73,6 +75,44 @@ async function updateTabIndicator(tabId, status, active) {
     });
   } catch {
     // The tab may not have a content script yet; the popup remains authoritative.
+  }
+}
+
+async function syncQuorumWithBackend(meetingId, role, updates) {
+  if (!role) {
+    return null;
+  }
+  const cleanMeetingId = (meetingId || "CG-LIVE-MEETING").trim();
+
+  try {
+    await fetch(`${MEETING_API_BASE}/participant/update`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        meeting_id: cleanMeetingId,
+        role,
+        ...updates
+      })
+    });
+
+    const evalResp = await fetch(`${MEETING_API_BASE}/quorum/evaluate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        meeting_id: cleanMeetingId,
+        require_audio_authenticity: false,
+        require_video_authenticity: true,
+        require_secondary_confirmation: false,
+        require_voice_identity: false,
+        require_challenge: false
+      })
+    });
+    if (!evalResp.ok) {
+      return null;
+    }
+    return await evalResp.json();
+  } catch {
+    return null;
   }
 }
 
@@ -128,7 +168,7 @@ async function ensureOffscreenDocument() {
   await chrome.offscreen.createDocument({
     url: OFFSCREEN_URL,
     reasons: ["USER_MEDIA"],
-    justification: "Capture user-started audio from a supported meeting tab and upload short verification segments."
+    justification: "Capture user-started audio and video from a supported meeting tab and upload short verification segments."
   });
 }
 
@@ -180,30 +220,32 @@ async function prepareScan(role) {
       tabId: tab.id
     });
     if (!offscreenResponse || !offscreenResponse.ok) {
-      throw new Error(offscreenResponse?.error || "Could not start tab audio capture.");
+      throw new Error(offscreenResponse?.error || "Could not start tab capture.");
     }
 
     const latest = await getState();
     const nextState = await saveState({
       ...latest,
       scanSessionActive: true,
-      scanStatus: `Capturing tab audio for ${role}; recording 10-second segments.`,
+      scanStatus: `Capturing tab audio & video for ${role}; recording 10-second segments.`,
       captureActive: true,
       role,
       tabId: tab.id,
       identityStatus: "Waiting for first segment",
       authenticityStatus: "Not checked",
-      latestVerification: null
+      videoAnalysisStatus: "Scanning video...",
+      latestVerification: null,
+      latestVideoVerification: null
     });
-    await updateTabIndicator(tab.id, `Capturing meeting tab audio for ${role}`, true);
+    await updateTabIndicator(tab.id, `Capturing meeting tab audio & video for ${role}`, true);
     return { ok: true, state: nextState };
   } catch (error) {
     if (await chrome.offscreen.hasDocument()) {
       await chrome.runtime.sendMessage({
         target: "offscreen",
         type: "CAPTURE_STOP"
-      }).catch(() => {});
-      await chrome.offscreen.closeDocument().catch(() => {});
+      }).catch(() => { });
+      await chrome.offscreen.closeDocument().catch(() => { });
     }
 
     await updateTabIndicator(tab.id, "Capture could not start", false);
@@ -214,11 +256,12 @@ async function prepareScan(role) {
       scanStatus: "Capture could not start.",
       captureActive: false,
       role: null,
-      tabId: null
+      tabId: null,
+      videoAnalysisStatus: "Not started"
     });
     return {
       ok: false,
-      error: `Could not start tab audio capture: ${error.message}`
+      error: `Could not start tab capture: ${error.message}`
     };
   }
 }
@@ -229,8 +272,8 @@ async function stopScan(reason = "Capture stopped by user.") {
     await chrome.runtime.sendMessage({
       target: "offscreen",
       type: "CAPTURE_STOP"
-    }).catch(() => {});
-    await chrome.offscreen.closeDocument().catch(() => {});
+    }).catch(() => { });
+    await chrome.offscreen.closeDocument().catch(() => { });
   }
 
   await updateTabIndicator(state.tabId, reason, false);
@@ -248,6 +291,7 @@ async function stopScan(reason = "Capture stopped by user.") {
 
 async function handleOffscreenEvent(message) {
   const state = await getState();
+  const meetingId = `CG-TAB-${state.tabId || "LIVE"}`;
 
   if (message.type === "CAPTURE_PROGRESS") {
     const nextState = await saveState({
@@ -260,6 +304,45 @@ async function handleOffscreenEvent(message) {
     return { ok: true, state: nextState };
   }
 
+  if (message.type === "VIDEO_VERIFICATION_RESPONSE") {
+    const response = message.response || {};
+    const verdict = response.verdict;
+    const confidencePct = typeof response.confidence === "number"
+      ? ` (${Math.round(response.confidence * 100)}%)`
+      : "";
+
+    let videoAnalysisStatus = "Inconclusive";
+    if (verdict === "no_suspicious_indicators") {
+      videoAnalysisStatus = `Authentic${confidencePct}`;
+    } else if (verdict === "suspicious_indicators") {
+      videoAnalysisStatus = `Suspicious${confidencePct}`;
+    }
+
+    const activeRole = response.role || state.role;
+    const quorumReport = await syncQuorumWithBackend(meetingId, activeRole, {
+      video_status: verdict || "inconclusive",
+      approved: verdict === "no_suspicious_indicators"
+    });
+
+    const quorumStatus = quorumReport
+      ? `${quorumReport.decision} (${quorumReport.verified_count}/${quorumReport.quorum_required})`
+      : state.quorumStatus;
+
+    const nextState = await saveState({
+      ...state,
+      videoAnalysisStatus,
+      quorumStatus,
+      latestVideoVerification: {
+        role: activeRole,
+        segmentIndex: message.segmentIndex,
+        httpStatus: message.httpStatus,
+        response,
+        receivedAt: new Date().toISOString()
+      }
+    });
+    return { ok: true, state: nextState };
+  }
+
   if (message.type === "VERIFICATION_RESPONSE") {
     const response = message.response;
     const decision = response && response.identity_status;
@@ -269,12 +352,25 @@ async function handleOffscreenEvent(message) {
       : successfulResponse && decision === "no_match"
         ? "No match"
         : "Inconclusive";
+
+    const activeRole = response?.participant || state.role;
+    const quorumReport = await syncQuorumWithBackend(meetingId, activeRole, {
+      voice_identity_status: decision || "inconclusive",
+      audio_authenticity_status: response?.audio_authenticity_status || "not_checked",
+      eidos_request_id: response?.request_id || null
+    });
+
+    const quorumStatus = quorumReport
+      ? `${quorumReport.decision} (${quorumReport.verified_count}/${quorumReport.quorum_required})`
+      : state.quorumStatus;
+
     const nextState = await saveState({
       ...state,
       identityStatus,
       authenticityStatus: response?.audio_authenticity_status || "Not provided",
+      quorumStatus,
       latestVerification: {
-        role: response?.participant || state.role,
+        role: activeRole,
         segmentIndex: message.segmentIndex,
         httpStatus: message.httpStatus,
         response,
@@ -286,7 +382,7 @@ async function handleOffscreenEvent(message) {
     });
     await updateTabIndicator(
       state.tabId,
-      `Latest ${state.role} verification: ${identityStatus}`,
+      `Latest ${state.role} verification: ${identityStatus} | Video: ${state.videoAnalysisStatus} | Quorum: ${quorumStatus}`,
       state.captureActive
     );
     return { ok: true, state: nextState };
@@ -321,8 +417,8 @@ async function handleOffscreenEvent(message) {
       scanStatus: `Capture stopped: ${message.error}`,
       identityStatus: state.latestVerification ? state.identityStatus : "Inconclusive"
     });
-    await updateTabIndicator(state.tabId, "Capture stopped after an audio error", false);
-    await chrome.offscreen.closeDocument().catch(() => {});
+    await updateTabIndicator(state.tabId, "Capture stopped after a capture error", false);
+    await chrome.offscreen.closeDocument().catch(() => { });
     return { ok: true, state: nextState };
   }
 
@@ -362,6 +458,7 @@ async function handleMessage(message, sender) {
   if ([
     "CAPTURE_PROGRESS",
     "VERIFICATION_RESPONSE",
+    "VIDEO_VERIFICATION_RESPONSE",
     "UPLOAD_FAILED",
     "CAPTURE_ERROR"
   ].includes(message.type)) {
@@ -390,7 +487,7 @@ chrome.tabs.onRemoved.addListener((tabId) => {
     .then(state => state.tabId === tabId
       ? stopScan("Meeting tab closed; capture stopped.")
       : undefined)
-    .catch(() => {});
+    .catch(() => { });
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
@@ -405,7 +502,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
       }
       return undefined;
     })
-    .catch(() => {});
+    .catch(() => { });
 });
 
 chrome.runtime.onInstalled.addListener(async () => {
