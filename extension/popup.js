@@ -85,21 +85,48 @@ function renderLatestVerification(latest) {
   elements.latestTransportError.textContent = latest.transportError || "";
 
   if (!response) {
-    elements.latestOutcome.textContent = "Identity decision: Inconclusive (no backend response)";
+    const hasHttpStatus = Number.isInteger(latest.httpStatus);
+    elements.latestOutcome.textContent = hasHttpStatus
+      ? `Identity decision: API error (HTTP ${latest.httpStatus}; invalid response)`
+      : "Identity decision: Inconclusive (no backend response)";
     elements.latestSimilarity.textContent = "Similarity: Not available";
     elements.latestAuthenticity.textContent = "Audio authenticity: Not available";
-    elements.latestRequest.textContent = `Segment ${latest.segmentIndex}; no request ID returned`;
-    elements.latestResponse.textContent = "No backend response was received.";
+    elements.latestRequest.textContent = hasHttpStatus
+      ? `Segment ${latest.segmentIndex}; HTTP ${latest.httpStatus}; no request ID returned`
+      : `Segment ${latest.segmentIndex}; no request ID returned`;
+    elements.latestResponse.textContent = hasHttpStatus
+      ? "The backend returned a non-JSON response."
+      : "No backend response was received.";
     return;
   }
 
   const decision = response.identity_status;
   const successfulResponse = latest.httpStatus >= 200 && latest.httpStatus < 300;
-  const outcome = successfulResponse && decision === "match"
-    ? "Match"
-    : successfulResponse && decision === "no_match"
-      ? "No match"
-      : "Inconclusive";
+  const invalidAudio = Array.isArray(response.errors) && response.errors.some(
+    entry => entry?.error?.code === "unsupported_format"
+      || entry?.error?.code === "file_too_large"
+      || (
+        entry?.error?.type === "unprocessable_audio"
+        && entry?.error?.param === "file"
+      )
+      || [
+        "invalid_audio_file",
+        "empty_audio_file",
+        "audio_file_too_large",
+        "missing_audio_file"
+      ].includes(entry?.error?.code)
+  );
+  const outcome = !successfulResponse
+    ? invalidAudio
+      ? `Invalid audio (HTTP ${latest.httpStatus})`
+      : `API error (HTTP ${latest.httpStatus})`
+    : decision === "match"
+      ? "Match"
+      : decision === "no_match"
+        ? "No match"
+        : decision === "error"
+          ? "Verification error"
+          : "Inconclusive";
   const similarity = typeof response.similarity === "number"
     ? String(response.similarity)
     : "Not provided";

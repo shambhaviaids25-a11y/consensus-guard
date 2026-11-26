@@ -228,3 +228,4 @@ backend/.env
 # Test audio recordings
 test-audio/
 backend/.env
+backend/data/audit_log.json

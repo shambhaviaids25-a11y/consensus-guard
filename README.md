@@ -11,6 +11,11 @@ python -m pip install -r backend\requirements.txt
 python -m uvicorn backend.main:app --reload
 ```
 
+Python 3.14 is the conservative recommended runtime. The pinned OpenCV release
+provides a CPython stable-ABI wheel that I verified installs and runs on Python
+3.15, but its published Python classifiers currently stop at 3.14, so 3.15 is
+not yet explicitly claimed by OpenCV.
+
 The API listens at `http://127.0.0.1:8000`. Enrollment is available at `POST /api/enroll`
 as `multipart/form-data` with a `role` (`CFO`, `COO`, `VP` or `HOL`) and an `audio` file.
 Eidos validates that decoded enrollment audio is 15–60 seconds and contains at least
@@ -41,8 +46,15 @@ returned with their HTTP status and sanitized error body; configure a key with t
 The Manifest V3 extension is in `extension\`. It captures audio only from the
 active supported Google Meet, Microsoft Teams, or Zoom tab after you click
 **Start Scan**. It does not request microphone access or capture video. The
-selected role (CFO, COO, VP, or HOL) is the comparison target; tab audio can mix
-participants, so unclear or mixed segments must be treated as inconclusive.
+selected role (CFO, COO, VP, or HOL) is the comparison target; Chrome tab capture
+provides the tab's mixed audio and does not isolate a particular speaker. Per the
+[Eidos documentation](https://platform.detectif.ai/docs/speaker-verification/),
+verification accepts 3–60 seconds of audio with at least 2 seconds of speech, so a
+10-second segment containing too little speech is rejected rather than matched.
+
+DetectifAI's [API documentation](https://platform.detectif.ai/docs/) says successfully
+read recordings are retained for 30 days and enrollment and verification consume
+account credits. Submit only recordings whose speakers have consented.
 
 To load or reload it in Chrome:
 
@@ -56,7 +68,9 @@ To load or reload it in Chrome:
 5. Confirm Chrome shows tab-audio capture and meeting audio remains audible.
    The extension records standalone WebM audio segments of about 10 seconds and
    sends them sequentially as multipart `role`, `audio`, and
-   `detect_deepfake=false` fields to `POST /api/verify/audio`.
+   `detect_deepfake=false` fields to `POST /api/verify/audio`. It also sends the
+   measured segment duration to the backend for diagnostics; that field is not
+   forwarded to Eidos.
 6. Review the backend decision, similarity, request/operation IDs, and returned
    response in the popup. Click **Stop Scan** to stop recording, end the audio
    tracks, close the AudioContext, and stop further uploads.
