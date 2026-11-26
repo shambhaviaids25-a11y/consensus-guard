@@ -5,6 +5,7 @@ const elements = {
   retryConnection: document.getElementById("retry-connection"),
   startScan: document.getElementById("start-scan"),
   stopScan: document.getElementById("stop-scan"),
+  downloadAudit: document.getElementById("download-audit"),
   captureIndicator: document.getElementById("capture-indicator"),
   scanStatus: document.getElementById("scan-status"),
   actionError: document.getElementById("action-error"),
@@ -28,6 +29,7 @@ let currentState = {
   scanSessionActive: false,
   scanStatus: "Not started",
   captureActive: false,
+  tabId: null,
   identityStatus: "Not started",
   authenticityStatus: "Not started",
   videoAnalysisStatus: "Not started",
@@ -209,10 +211,18 @@ async function stopScan() {
   }
 }
 
+function downloadAuditReport() {
+  showActionError();
+  const meetingId = `CG-TAB-${currentState.tabId || "LIVE"}`;
+  const url = `http://localhost:8000/api/meeting/audit/${encodeURIComponent(meetingId)}/download`;
+  chrome.tabs.create({ url });
+}
+
 elements.role.addEventListener("change", () => renderState(currentState));
 elements.retryConnection.addEventListener("click", checkBackend);
 elements.startScan.addEventListener("click", startScan);
 elements.stopScan.addEventListener("click", stopScan);
+elements.downloadAudit.addEventListener("click", downloadAuditReport);
 
 chrome.runtime.onMessage.addListener(message => {
   if (message?.target === "popup" && message.type === "STATE_UPDATED") {

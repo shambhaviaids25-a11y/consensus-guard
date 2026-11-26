@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 
-REQUIRED_ROLES = ("CFO", "VP", "HOL","COO")
+REQUIRED_ROLES = ("CFO", "VP", "HOL", "COO")
 QUORUM_THRESHOLD = 2
 
 
@@ -11,6 +11,8 @@ def evaluate_participant(
     require_audio_authenticity: bool = True,
     require_video_authenticity: bool = True,
     require_secondary_confirmation: bool = False,
+    require_voice_identity: bool = True,
+    require_challenge: bool = True,
 ) -> Dict[str, Any]:
     """
     Evaluates a single executive's verification evidence.
@@ -48,12 +50,17 @@ def evaluate_participant(
 
     # 2. Eidos Speaker Identity Verification
     voice_status = str(record.get("voice_identity_status") or "missing").strip().lower()
-    voice_passed = voice_status == "match"
-    if not voice_passed:
-        if voice_status in {"no_match", "mismatch", "spoof", "suspicious"}:
+    if require_voice_identity:
+        voice_passed = voice_status == "match"
+        if not voice_passed:
+            if voice_status in {"no_match", "mismatch", "spoof", "suspicious"}:
+                suspicious_flags.append(f"Voice identity check failed ({voice_status}).")
+            else:
+                reasons.append(f"Voice identity unresolved ({voice_status}).")
+    else:
+        voice_passed = voice_status not in {"no_match", "mismatch", "spoof", "suspicious"}
+        if not voice_passed:
             suspicious_flags.append(f"Voice identity check failed ({voice_status}).")
-        else:
-            reasons.append(f"Voice identity unresolved ({voice_status}).")
 
     # 3. Audio Synthetic-Media Authenticity (when enabled)
     audio_status = str(record.get("audio_authenticity_status") or "missing").strip().lower()
@@ -74,21 +81,21 @@ def evaluate_participant(
     if require_video_authenticity:
         video_passed = video_status == "no_suspicious_indicators"
         if not video_passed:
-            if video_status == "suspicious":
+            if video_status in {"suspicious", "suspicious_indicators"}:
                 suspicious_flags.append("Video analysis detected suspicious manipulation indicators.")
             else:
                 reasons.append(f"Video authenticity unresolved ({video_status}).")
     else:
-        video_passed = video_status != "suspicious"
+        video_passed = video_status not in {"suspicious", "suspicious_indicators"}
         if not video_passed:
             suspicious_flags.append("Video analysis detected suspicious manipulation indicators.")
 
     # 5. Live Meeting Challenge
-    challenge_completed = bool(record.get("challenge_completed") is True)
+    challenge_completed = (not require_challenge) or bool(record.get("challenge_completed") is True)
     if not challenge_completed:
         reasons.append("Live meeting challenge has not been completed.")
 
-    # 6. Secondary Out-of-Band Confirmation (required when triggered or policy-enforced)
+    # 6. Secondary Out-of-Band Confirmation
     secondary_required = require_secondary_confirmation or bool(record.get("secondary_required") is True)
     secondary_completed = bool(record.get("secondary_confirmed") is True)
     if secondary_required and not secondary_completed:
@@ -136,9 +143,11 @@ def evaluate_quorum(
     require_audio_authenticity: bool = True,
     require_video_authenticity: bool = True,
     require_secondary_confirmation: bool = False,
+    require_voice_identity: bool = True,
+    require_challenge: bool = True,
 ) -> Dict[str, Any]:
     """
-    Evaluates the 2-of-3 executive quorum policy across CFO, VP_SECURITY, and LEGAL.
+    Evaluates the 2-of-4 executive quorum policy across CFO, VP, HOL, and COO.
     Returns APPROVED, REJECTED, or ON_HOLD with explainable reasons.
     """
     safe_participants = participants if isinstance(participants, dict) else {}
@@ -157,6 +166,8 @@ def evaluate_quorum(
             require_audio_authenticity=require_audio_authenticity,
             require_video_authenticity=require_video_authenticity,
             require_secondary_confirmation=require_secondary_confirmation,
+            require_voice_identity=require_voice_identity,
+            require_challenge=require_challenge,
         )
         evaluations[role] = res
 
@@ -172,11 +183,6 @@ def evaluate_quorum(
     verified_count = len(verified_roles)
     remaining_possible = verified_count + len(unresolved_roles)
 
-    # Decision policy:
-    # 1. Any active security/deepfake/spoof alert blocks immediate approval -> ON_HOLD (or REJECTED if quorum impossible)
-    # 2. If 2+ verified approvals and zero suspicious flags -> APPROVED
-    # 3. If fewer than 2 approvals remain mathematically possible -> REJECTED
-    # 4. Otherwise -> ON_HOLD awaiting pending/unresolved verification
     if remaining_possible < QUORUM_THRESHOLD:
         decision = "REJECTED"
         summary = (
@@ -193,7 +199,7 @@ def evaluate_quorum(
     elif verified_count >= QUORUM_THRESHOLD:
         decision = "APPROVED"
         summary = (
-            f"Transaction APPROVED: Quorum satisfied ({verified_count}/3 verified approvals: "
+            f"Transaction APPROVED: Quorum satisfied ({verified_count}/{len(REQUIRED_ROLES)} verified approvals: "
             f"{', '.join(verified_roles)})."
         )
     else:
@@ -204,7 +210,7 @@ def evaluate_quorum(
         )
 
     return {
-        "decision": decision,  # APPROVED | ON_HOLD | REJECTED
+        "decision": decision,
         "quorum_required": QUORUM_THRESHOLD,
         "verified_count": verified_count,
         "verified_roles": verified_roles,

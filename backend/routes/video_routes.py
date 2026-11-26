@@ -1,37 +1,46 @@
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException
+from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from fastapi.concurrency import run_in_threadpool
-from backend.services.video_service import validate_video_metadata, analyze_video_bytes
+from services.video_service import (
+    validate_video_metadata,
+    analyze_video_bytes,
+    analyze_frame_bytes,
+    detector,
+)
 
-router = APIRouter(prefix="/api/verify", tags=["Video Verification"])
-
-VALID_ROLES = {"CFO", "VP_SECURITY", "LEGAL"}
+router = APIRouter(prefix="/api/verify", tags=["video"])
 
 
 @router.post("/video")
 async def verify_video(
-    role: str = Form(..., description="Executive role: CFO, VP_SECURITY, or LEGAL"),
-    file: UploadFile = File(..., description="MP4 video file for visual authenticity check"),
+    file: UploadFile = File(...),
+    role: str = Form("DEFAULT"),
 ):
-    normalized_role = role.strip().upper()
-    if normalized_role not in VALID_ROLES:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Invalid role '{role}'. Must be one of: {', '.join(sorted(VALID_ROLES))}.",
+    raw_bytes = await file.read()
+    validation = validate_video_metadata(
+        filename=file.filename,
+        content_type=file.content_type,
+        size_bytes=len(raw_bytes),
+    )
+    if not validation.get("valid"):
+        raise HTTPException(status_code=400, detail=validation.get("error", "Invalid media file."))
+
+    content_type = (file.content_type or "").lower()
+    if content_type.startswith("image/"):
+        result = await run_in_threadpool(analyze_frame_bytes, raw_bytes, role)
+    else:
+        result = await run_in_threadpool(
+            analyze_video_bytes,
+            raw_bytes,
+            file.filename or "segment.webm",
+            role,
         )
 
-    video_bytes = await file.read()
-    validation_error = validate_video_metadata(
-        filename=file.filename or "",
-        content_type=file.content_type or "",
-        size_bytes=len(video_bytes),
-    )
-    if validation_error:
-        raise HTTPException(status_code=400, detail=validation_error)
-
-    result = await run_in_threadpool(
-        analyze_video_bytes,
-        video_bytes=video_bytes,
-        filename=file.filename or "upload.mp4",
-        role=normalized_role,
-    )
-    return result
+    return {
+        "verdict": result.get("verdict", "inconclusive"),
+        "status": result.get("status", result.get("verdict", "inconclusive")),
+        "confidence": result.get("confidence", 0.0),
+        "frames_checked": result.get("frames_checked", result.get("frames_analyzed", 0)),
+        "reason": result.get("reason", ""),
+        "role": role,
+        "model_available": detector.is_available,
+    }

@@ -74,6 +74,8 @@ class EvaluateQuorumRequest(BaseModel):
     require_audio_authenticity: bool = True
     require_video_authenticity: bool = True
     require_secondary_confirmation: bool = False
+    require_voice_identity: bool = True
+    require_challenge: bool = True
 
 
 @router.post("/challenge/start")
@@ -218,6 +220,8 @@ def run_quorum_evaluation(payload: EvaluateQuorumRequest):
         require_audio_authenticity=payload.require_audio_authenticity,
         require_video_authenticity=payload.require_video_authenticity,
         require_secondary_confirmation=payload.require_secondary_confirmation,
+        require_voice_identity=payload.require_voice_identity,
+        require_challenge=payload.require_challenge,
     )
     meeting["last_decision"] = decision_report
 
