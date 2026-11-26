@@ -1,20 +1,54 @@
 #consensusguard-session-indicator {
   position: fixed;
   z-index: 2147483647;
-  right: 16px;
-  bottom: 16px;
-  max-width: min(360px, calc(100vw - 32px));
-  padding: 9px 12px;
+  right: 14px;
+  bottom: max(88px, calc(env(safe-area-inset-bottom) + 76px));
+  max-width: min(320px, calc(100vw - 28px));
+  padding: 8px 11px;
   border: 1px solid #cbd4e1;
   border-radius: 8px;
   color: #25334a;
   background: #fff;
-  box-shadow: 0 4px 16px rgb(22 34 55 / 18%);
+  box-shadow: 0 3px 12px rgb(22 34 55 / 16%);
   font: 600 12px/1.35 "Segoe UI", Arial, sans-serif;
   pointer-events: none;
+  overflow-wrap: anywhere;
 }
 
-#consensusguard-session-indicator[data-active="true"] {
+#consensusguard-session-indicator[data-status="starting"] {
+  border-color: #9dbcf9;
+  color: #194993;
+  background: #edf4ff;
+}
+
+#consensusguard-session-indicator[data-status="capture"],
+#consensusguard-session-indicator[data-status="upload"] {
   border-color: #9bd6bb;
   color: #12643d;
+  background: #e6f7ee;
+}
+
+#consensusguard-session-indicator[data-status="match"] {
+  border-color: #63bd8d;
+  color: #075b32;
+  background: #dff5e8;
+}
+
+#consensusguard-session-indicator[data-status="no-match"],
+#consensusguard-session-indicator[data-status="inconclusive"] {
+  border-color: #e2bd73;
+  color: #704b0b;
+  background: #fff5df;
+}
+
+#consensusguard-session-indicator[data-status="error"] {
+  border-color: #e1a09a;
+  color: #8d2921;
+  background: #fff0ee;
+}
+
+#consensusguard-session-indicator[data-status="stopped"] {
+  border-color: #cbd4e1;
+  color: #46546a;
+  background: #edf0f5;
 }

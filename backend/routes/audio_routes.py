@@ -1,4 +1,5 @@
 import hashlib
+import logging
 from pathlib import Path
 from typing import Any, Optional
 
@@ -13,10 +14,15 @@ from backend.routes.enrollment import (
     get_speaker_id_for_role,
     normalize_role,
 )
-from backend.services.eidos_service import EidosServiceError, verify_speaker
+from backend.services.eidos_service import (
+    EidosServiceError,
+    safe_speaker_reference,
+    verify_speaker,
+)
 
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 
 def _response_body(role: str, detect_deepfake: bool) -> dict[str, Any]:
@@ -116,10 +122,7 @@ def _normalize_response(
         )
         return 502, body
 
-    body["identity_status"] = decision
-    if _is_number(similarity):
-        body["similarity"] = similarity
-    else:
+    if not _is_number(similarity):
         _append_error(
             body,
             "identity",
@@ -127,7 +130,33 @@ def _normalize_response(
         )
         return 502, body
 
+    body["identity_status"] = decision
+    body["similarity"] = similarity
     return status_code, body
+
+
+def _log_verification_result(
+    role: str, speaker_id: str, status_code: int, body: dict[str, Any]
+) -> None:
+    decision = body["identity_status"]
+    reason = f"eidos_{decision}" if decision in {"match", "no_match"} else "unspecified_error"
+    for item in body.get("errors", []):
+        error = item.get("error") if isinstance(item, dict) else None
+        code = error.get("code") if isinstance(error, dict) else None
+        if isinstance(code, str) and code.replace("_", "").replace("-", "").isalnum():
+            reason = code[:64]
+            break
+    logger.info(
+        "voice_verification_result role=%s speaker_ref=%s http_status=%d "
+        "final_decision=%s reason=%s request_id_present=%s similarity_present=%s",
+        role,
+        safe_speaker_reference(speaker_id),
+        status_code,
+        decision,
+        reason,
+        body.get("request_id") is not None,
+        body.get("similarity") is not None,
+    )
 
 
 def _request_error_response(
@@ -135,6 +164,13 @@ def _request_error_response(
 ) -> JSONResponse:
     body = _response_body(role, detect_deepfake)
     _append_error(body, "request", {"code": code, "message": message})
+    logger.info(
+        "voice_verification_result role=%s speaker_ref=unavailable http_status=%d "
+        "final_decision=error reason=%s",
+        role if role in ROLES else "invalid",
+        status_code,
+        code,
+    )
     return JSONResponse(status_code=status_code, content=body)
 
 
@@ -143,6 +179,7 @@ async def verify_audio(
     role: str = Form(""),
     audio: Optional[UploadFile] = File(None),
     detect_deepfake: bool = Form(False),
+    capture_duration_seconds: Optional[float] = Form(None),
 ) -> JSONResponse:
     role = normalize_role(role)
     if role not in ROLES:
@@ -217,14 +254,17 @@ async def verify_audio(
             audio=audio_bytes,
             detect_deepfake=detect_deepfake,
             idempotency_key=idempotency_key,
+            capture_duration_seconds=capture_duration_seconds,
         )
     except EidosServiceError as exc:
         body = _response_body(role, detect_deepfake)
         error = exc.payload.get("error", exc.payload)
         _append_error(body, "identity", error)
+        _log_verification_result(role, speaker_id, exc.status_code, body)
         return JSONResponse(status_code=exc.status_code, content=body)
 
     status_code, body = _normalize_response(
         role, detect_deepfake, status_code, payload
     )
+    _log_verification_result(role, speaker_id, status_code, body)
     return JSONResponse(status_code=status_code, content=body)

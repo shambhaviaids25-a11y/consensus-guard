@@ -3,11 +3,16 @@ import logging
 import os
 import re
 from pathlib import Path
+from typing import Optional
 
 from fastapi import APIRouter, File, Form, UploadFile
 from fastapi.responses import JSONResponse
 
-from backend.services.eidos_service import EidosServiceError, enroll_speaker
+from backend.services.eidos_service import (
+    EidosServiceError,
+    enroll_speaker,
+    safe_speaker_reference,
+)
 
 
 router = APIRouter()
@@ -92,6 +97,7 @@ def _invalid_request(code: str, message: str, status_code: int = 400) -> JSONRes
 async def enroll_executive(
     role: str = Form(...),
     audio: UploadFile = File(...),
+    capture_duration_seconds: Optional[float] = Form(None),
 ) -> JSONResponse:
     role = normalize_role(role)
     if role not in ROLES:
@@ -150,8 +156,42 @@ async def enroll_executive(
             content_type=content_type,
             audio=audio_bytes,
             idempotency_key=idempotency_key,
+            capture_duration_seconds=capture_duration_seconds,
         )
     except EidosServiceError as exc:
+        error = exc.payload.get("error", {})
+        error_code = (
+            error.get("code")
+            if isinstance(error, dict)
+            and isinstance(error.get("code"), str)
+            and re.fullmatch(r"[A-Za-z0-9_.:-]{1,64}", error["code"])
+            else "unknown"
+        )
+        logger.info(
+            "voice_enrollment_result role=%s speaker_ref=%s http_status=%d "
+            "final_decision=error reason=%s",
+            role,
+            safe_speaker_reference(speaker_id),
+            exc.status_code,
+            error_code,
+        )
         return JSONResponse(status_code=exc.status_code, content=exc.payload)
 
+    error = response.get("error") if isinstance(response, dict) else None
+    error_code = (
+        error.get("code")
+        if isinstance(error, dict)
+        and isinstance(error.get("code"), str)
+        and re.fullmatch(r"[A-Za-z0-9_.:-]{1,64}", error["code"])
+        else "none"
+    )
+    logger.info(
+        "voice_enrollment_result role=%s speaker_ref=%s http_status=%d "
+        "final_decision=%s reason=%s",
+        role,
+        safe_speaker_reference(speaker_id),
+        status_code,
+        "error" if status_code < 200 or status_code >= 300 or error is not None else "enrolled",
+        error_code if error_code != "none" else "eidos_enrolled",
+    )
     return JSONResponse(status_code=status_code, content=response)
