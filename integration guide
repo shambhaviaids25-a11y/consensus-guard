@@ -1,0 +1,40 @@
+# ConsensusGuard Integration Guide
+
+This guide covers end-to-end integration of the **ConsensusGuard Chrome Extension (Manifest V3)** with the **FastAPI Verification Backend**, including API contracts, role enrollment, Quorum state synchronization, and enterprise SFU integration patterns.
+
+---
+
+## 1. Architecture & Data Flow
+
+ConsensusGuard operates as a decoupled two-tier verification pipeline:
+
+1. **Client Capture Layer (`extension/`):**
+   * `popup.js` renders live status (`Voice identity`, `Audio authenticity`, `Video analysis`, `Quorum`) and dispatches user actions (`START_SCAN`, `STOP_SCAN`, `CHECK_BACKEND`) to the background service worker.
+   * `background.js` manages session state per browser tab (`CG-TAB-<tabId>`) and coordinates rolling capture segments.
+   * `offscreen.js` uses `chrome.tabCapture` and `MediaRecorder` / `<canvas>` extraction to capture tab audio (`.webm`) and video frames without blocking the active Google Meet WebRTC call.
+2. **Verification & Quorum Layer (`backend/`):**
+   * `POST /api/verify/audio` validates role mappings (`CFO`, `COO`, `VP`, `HOL`), checks biometric speaker identity and synthetic voice authenticity, and returns normalized verification JSON.
+   * `POST /api/verify/video` runs OpenCV + NumPy 2D-FFT spectral and facial ROI forensic checks.
+   * The **Quorum Engine** aggregates both signals into a `2/2` decision (`APPROVED (2/2)`, `ON_HOLD (1/2)`, or `BLOCKED`) and records metadata for `GET /api/meeting/audit/{meeting_id}/download`.
+
+---
+
+## 2. Environment & Role Enrollment Configuration
+
+### Step 1: Configure `.env`
+Create a `.env` file in the repository root (`consensus-guard/.env`) based on `.env.example`:
+
+```env
+# Upstream Eidos / Detectif Biometric API
+DETECTIF_API_KEY=your_api_key_here
+EIDOS_BASE_URL=[https://api.detectif.ai](https://api.detectif.ai)
+
+# Executive Role -> Enrolled Speaker ID Mapping
+EIDOS_CFO_SPEAKER_ID=cfo
+EIDOS_COO_SPEAKER_ID=coo
+EIDOS_VP_SPEAKER_ID=vp
+EIDOS_HOL_SPEAKER_ID=hol
+
+# Backend Server Settings
+HOST=127.0.0.1
+PORT=8000
