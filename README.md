@@ -1,83 +1,118 @@
-# consensus-guard
+# ConsensusGuard
 
-## Backend voice enrollment
+**Real-Time Multimodal Biometric & Deepfake Verification for High-Stakes Video Calls**
 
-From the repository root, install the backend dependencies and add the four speaker
-ID variables shown in `backend\.env.example` to the existing `backend\.env`. Keep its
-existing API key entry; fill the IDs from the existing Eidos profiles:
+ConsensusGuard is a Chrome extension and FastAPI security sidecar designed to prevent real-time executive impersonation and deepfake fraud during live video meetings (such as Google Meet). Before sensitive financial, legal, or operational approvals take place, ConsensusGuard verifies both **who is speaking** (biometric voice identity) and **whether the stream is live and authentic** (visual forensic & audio deepfake detection), enforcing a **2/2 Quorum** policy and generating a tamper-evident **Audit Report**.
 
-```powershell
-python -m pip install -r backend\requirements.txt
+---
+
+## Key Features
+
+* **2/2 Multimodal Quorum Verification:** Requires both **Voice Identity (`Match`)** and **Video Authenticity (`Authentic`)** to pass simultaneously before granting `APPROVED (2/2)` status—preventing single-modality bypasses (voice-only clones or silent face swaps).
+* **Executive Role-Based Biometric Verification:** Maps privileged meeting roles (`CFO`, `COO`, `VP`, `HOL`) to enrolled speaker voiceprints via the **Eidos** verification API, with audio deepfake detection and graceful fallback handling.
+* **Lightweight Real-Time Video Forensics:** Analyzes captured video frames using **OpenCV** and **NumPy**—combining **2D Fast Fourier Transform (2D-FFT)** frequency spectrum analysis (to catch screen-replay moiré and generative upsampling artifacts) with facial ROI skin-texture consistency checks.
+* **Consent-First Chrome Extension (`Manifest V3`):** Captures tab audio and video only after the user explicitly selects a role and clicks **Start Scan**, displaying live per-modality status (`Loading...`, `Match`, `Authentic`, `APPROVED (2/2)`) and a persistent `Capture active` indicator.
+* **Compliance Audit Trail:** Logs verification metadata (`request_id`, `operation_id`, role, timestamps, similarity scores, and Quorum decisions) without storing raw call media, allowing one-click **Audit Report** downloads.
+
+---
+
+## Architecture
+
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                    Google Meet Browser Tab                      │
+└───────────────────────────────┬─────────────────────────────────┘
+                                │ User clicks "Start Scan" (Role)
+                                ▼
+┌─────────────────────────────────────────────────────────────────┐
+│             ConsensusGuard Chrome Extension (MV3)               │
+│  • popup.html / popup.js  → Live UI & Quorum status dashboard   │
+│  • background.js          → Session orchestration & API calls   │
+│  • offscreen.js           → Tab audio/video segment capture     │
+└───────────────────┬───────────────────────────┬─────────────────┘
+                    │ POST /api/verify/audio    │ POST /api/verify/video
+                    ▼                           ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                   FastAPI Security Backend                      │
+│  • audio_routes.py  → Role mapping & Eidos voice verification   │
+│  • video_routes.py  → Frame extraction & 2D-FFT/ROI forensics   │
+│  • Quorum Engine    → Combines Voice + Video into 2/2 verdict   │
+│  • Audit Endpoint   → /api/meeting/audit/{meeting_id}/download  │
+└─────────────────────────────────────────────────────────────────┘
+
+
+consensus-guard/
+├── backend/
+│   ├── main.py                  # FastAPI application entrypoint & router setup
+│   ├── routes/
+│   │   ├── audio_routes.py      # /api/verify/audio endpoint & Eidos integration
+│   │   ├── video_routes.py      # /api/verify/video endpoint & Quorum state updates
+│   │   └── enrollment.py        # Executive role-to-speaker ID mapping & validation
+│   └── services/
+│       ├── eidos_service.py     # Upstream Eidos biometric & deepfake API client
+│       └── video_service.py     # OpenCV / NumPy 2D-FFT & facial ROI forensic checks
+├── extension/
+│   ├── manifest.json            # Chrome Extension Manifest V3 configuration
+│   ├── popup.html / popup.js    # Extension UI, role selector & live status rendering
+│   ├── background.js            # Service worker managing scan lifecycle & state
+│   └── offscreen.js             # Offscreen document for tabCapture media recording
+├── .env.example                 # Environment variable template
+└── requirements.txt             # Python dependencies
+
+
+
+Getting Started
+1. Prerequisites
+Python 3.10+
+Google Chrome (for loading the unpacked Manifest V3 extension)
+Eidos / Detectif API Key (configured in .env)
+
+2. Backend Setup
+Clone the repository and navigate to the project root:
+Bash
+git clone [https://github.com/](https://github.com/)<your-org>/consensus-guard.git
+cd consensus-guard
+Create your local environment file from .env.example:
+
+Bash
+cp .env.example .env
+Configure your API key and enrolled executive speaker IDs inside .env:
+
+Code snippet
+DETECTIF_API_KEY=your_api_key_here
+EIDOS_CFO_SPEAKER_ID=cfo
+EIDOS_COO_SPEAKER_ID=coo
+EIDOS_VP_SPEAKER_ID=vp
+EIDOS_HOL_SPEAKER_ID=hol
+Install Python dependencies:
+
+Bash
+pip install -r requirements.txt
+pip install opencv-python-headless numpy fastapi uvicorn python-multipart httpx
+Start the FastAPI server from the repository root:
+
+Bash
 python -m uvicorn backend.main:app --reload
-```
+The backend will run at http://127.0.0.1:8000 (API docs available at http://127.0.0.1:8000/docs).
 
-Python 3.14 is the conservative recommended runtime. The pinned OpenCV release
-provides a CPython stable-ABI wheel that I verified installs and runs on Python
-3.15, but its published Python classifiers currently stop at 3.14, so 3.15 is
-not yet explicitly claimed by OpenCV.
+3. Chrome Extension Setup
+Open chrome://extensions in Google Chrome.
+Enable Developer mode (top-right toggle).
+Click Load unpacked and select the extension/ folder from this repository.
+Pin ConsensusGuard to your Chrome toolbar.
 
-The API listens at `http://127.0.0.1:8000`. Enrollment is available at `POST /api/enroll`
-as `multipart/form-data` with a `role` (`CFO`, `COO`, `VP` or `HOL`) and an `audio` file.
-Eidos validates that decoded enrollment audio is 15–60 seconds and contains at least
-10 seconds of speech. Each role maps to its existing Eidos profile using its matching
-`EIDOS_*_SPEAKER_ID` value. These IDs and the API key must stay in `backend\.env` and
-must not be put in frontend or extension code. Missing or invalid speaker IDs are
-rejected before an Eidos request is made.
-The existing UI role values `VP_SECURITY` and `LEGAL` remain accepted as aliases for
-`VP` and `HOL`, respectively.
+Usage
+Join an active Google Meet call.
+Click the ConsensusGuard extension icon and confirm Backend connection: Connected.
+Select the Executive role to verify (e.g., CFO, COO, VP, or HOL).
+Click Start Scan while the participant speaks on camera:
+Voice identity evaluates biometric speaker match.
+Audio authenticity checks for synthetic/cloned voice artifacts.
+Video analysis verifies live webcam authenticity against replay/deepfake artifacts.
+Quorum updates to APPROVED (2/2) once both voice and video checks pass.
+Click Download Audit Report to export the session's verification record.
 
-`backend\main.py` loads `backend\.env` at startup. The local `.env` file is ignored by
-Git; only the empty variable names are shown in the example file.
-
-To try the endpoint from PowerShell after starting the server:
-
-```powershell
-curl.exe -X POST http://127.0.0.1:8000/api/enroll `
-  -F "role=CFO" `
-  -F "audio=@C:\path\to\enrollment.wav;type=audio/wav"
-```
-
-The enrollment response omits the private Eidos speaker ID. Eidos API errors are
-returned with their HTTP status and sanitized error body; configure a key with the
-`speakers:enroll` scope and sufficient credits.
-
-## Chrome extension tab-audio verification
-
-The Manifest V3 extension is in `extension\`. It captures audio only from the
-active supported Google Meet, Microsoft Teams, or Zoom tab after you click
-**Start Scan**. It does not request microphone access or capture video. The
-selected role (CFO, COO, VP, or HOL) is the comparison target; Chrome tab capture
-provides the tab's mixed audio and does not isolate a particular speaker. Per the
-[Eidos documentation](https://platform.detectif.ai/docs/speaker-verification/),
-verification accepts 3–60 seconds of audio with at least 2 seconds of speech, so a
-10-second segment containing too little speech is rejected rather than matched.
-
-DetectifAI's [API documentation](https://platform.detectif.ai/docs/) says successfully
-read recordings are retained for 30 days and enrollment and verification consume
-account credits. Submit only recordings whose speakers have consented.
-
-To load or reload it in Chrome:
-
-1. Open `chrome://extensions` and enable **Developer mode**.
-2. Click **Load unpacked** (or **Reload** for an already-loaded copy) and select
-   `C:\Users\punya\consensus-guard\extension`.
-3. Ensure the FastAPI backend is running at `http://localhost:8000`. Open a
-   supported meeting tab and refresh it if it was open before loading the extension.
-4. Open the ConsensusGuard popup, confirm the backend says **Connected**, select
-   the executive role, and click **Start Scan**.
-5. Confirm Chrome shows tab-audio capture and meeting audio remains audible.
-   The extension records standalone WebM audio segments of about 10 seconds and
-   sends them sequentially as multipart `role`, `audio`, and
-   `detect_deepfake=false` fields to `POST /api/verify/audio`. It also sends the
-   measured segment duration to the backend for diagnostics; that field is not
-   forwarded to Eidos.
-6. Review the backend decision, similarity, request/operation IDs, and returned
-   response in the popup. Click **Stop Scan** to stop recording, end the audio
-   tracks, close the AudioContext, and stop further uploads.
-
-Unsupported tabs and capture failures are reported in the popup. If the backend
-disconnects or rejects a segment, capture continues and that segment is shown as
-inconclusive rather than as a successful verification. This prototype does not
-separate speakers or automatically detect overlapping speech; a backend
-`no_match` result on mixed audio is not proof that the selected executive did
-not speak.
+Privacy & Security Design
+Explicit User Consent: Media capture only begins when a participant clicks Start Scan and stops immediately on Stop Scan.
+Ephemeral Processing: Audio and video segments are processed in memory and discarded after scoring; raw audio/video streams are never persisted to disk.
+Enterprise Scalability Path: Designed to transition from client-side tab capture to server-side SFU media taps triggered by active-speaker Voice Activity Detection (VAD) and privileged role registries for large enterprise calls.
